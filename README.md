@@ -1,1 +1,1 @@
-# daisy-slack-emojifier
+# Daisy: A Slack Bot just to test OpenAI API.
