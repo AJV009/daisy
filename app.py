@@ -1,19 +1,18 @@
 from dotenv import load_dotenv
 import os, re
 from slack_bolt import App
+from slack_bolt.adapter.socket_mode import SocketModeHandler
 import openai
 
 load_dotenv()
 
 app =  App(
     token=os.getenv("SLACK_BOT_TOKEN"),
-    signing_secret=os.getenv("SLACK_SIGNING_SECRET")
 )
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 """
 TODO:
-- Use Flask or FastAPI to handle Slack API calls.
 - Use some kind of DB to store public_event_logs.
 - Collect more data from Slack weekend fun activity and store in classify.json.
 """
@@ -43,4 +42,5 @@ def emojifier(query_val):
 
 #  Run all daisies
 if __name__ == "__main__":
-    app.start(port=int(os.environ.get("PORT",3050)))
+    handler = SocketModeHandler(app, os.getenv("SLACK_APP_TOKEN"))
+    handler.start()
