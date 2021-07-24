@@ -26,7 +26,7 @@ def app_mention(event):
     Then adds the channel and event_ts to the public_event_logs.
     If it starts with '@daisy Weekend fun:' categorize the message with 'weekend'.
     """
-    if re.sub(r'<[^<]+?>', '', event['text']).strip().startswith('Weekend fun:'):
+    if re.sub(r'<[^<]+?>', '', event['text'].lower()).strip().startswith('weekend fun'):
         public_event_logs.append(
             {'channel_id': event['channel'], 'message_ts': event['event_ts'], 'category': 'weekend'})
 
